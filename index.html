@@ -22,7 +22,7 @@
     <a class="btn btn-success" href="#" onclick="findoutNewNumber(event)">Отримати lifecell номер</a>
     <br/>
     <small id="life-here" class="text-muted mx-sm-12">
-      В тебе 3 спроби. <br />  Звісно, якщо ти не супер-крутий. :)
+      В тебе 5 спроб. <br />  Звісно, якщо ти не супер-крутий. :)
     </small>
 
   </div>
@@ -46,13 +46,13 @@
         document.getElementById('mts').value
       ).toString(CryptoJS.enc.Utf8);
       if (life.length > 0) {
-        document.getElementById('life-here').innerText = 'Good job! My life:) is ' + life;
+        document.getElementById('life-here').innerText = 'Молодець! Мій lifecell:  ' + life;
       } else {
         window.localStorage.tried = parseInt(window.localStorage.tried) + 1 || 1;
-        document.getElementById('life-here').innerText = 'Невірно, пробач. Лишилося ' + (3 - window.localStorage.tried || 0) + ' спроби.';
+        document.getElementById('life-here').innerText = 'Невірно, пробач. Лишилося ' + (5 - window.localStorage.tried || 0) + ' спроб(и/а).';
       }
 
-      if (window.localStorage.tried > 2) {
+      if (window.localStorage.tried > 4) {
         document.getElementById('container').remove();
       }
     }
