@@ -13,13 +13,13 @@
 <body style="height: 100vh; display: flex; justify-content:center; align-items:center;">
   <div id="container" class='container text-center'>
     <p>Вкажи правильно мій vodafone номер:</p>
-    <form class="form-inline">
+    <form class="form-inline" onsubmit="findoutNewNumber()" action="#">
       <div class="form-group" style="margin: auto;">
         <label for="mts">+38 (095)&nbsp</label>
         <input type="text" id="mts" class="form-control text-center" placeholder="7 цифр" style="width: 50pt; display: inline-block;">
       </div>
     </form>
-    <a class="btn btn-success" href="#" onclick="findoutNewNumber(event)">Отримати lifecell номер</a>
+    <a class="btn btn-success" href="#" onclick="findoutNewNumber(event)">Дізнатись мій lifecell</a>
     <br/>
     <small id="life-here" class="text-muted mx-sm-12">
       В тебе 5 спроб. <br />  Звісно, якщо ти не супер-крутий, щоб очистити локальне сховище. :)
@@ -40,13 +40,13 @@
       }
     };
     function findoutNewNumber(e) {
-      e.preventDefault();
+      if (e) e.preventDefault();
       var life = CryptoJS.AES.decrypt(
         "U2FsdGVkX19KbNOuRmcq3cU7aP7EBC19wYHk42rBW/I=",
         document.getElementById('mts').value
       ).toString(CryptoJS.enc.Utf8);
       if (life.length > 0) {
-        document.getElementById('life-here').innerText = 'Молодець! Мій lifecell:  ' + life;
+        document.getElementById('life-here').innerText = 'Okay! Мій lifecell:  ' + life;
       } else {
         window.localStorage.tried = parseInt(window.localStorage.tried) + 1 || 1;
         document.getElementById('life-here').innerText = 'Невірно, пробач. Лишилося ' + (5 - window.localStorage.tried || 0) + ' спроб(и/а).';
