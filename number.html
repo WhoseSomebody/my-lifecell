@@ -1,0 +1,59 @@
+<html>
+
+<head>
+  <title>Мій lifecell</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.0.0-beta.3/dist/css/bootstrap-material-design.min.css"
+    integrity="sha384-k5bjxeyx3S5yJJNRD1eKUMdgxuvfisWKku5dwHQq9Q/Lz6H8CyL89KF52ICpX4cL" crossorigin="anonymous">
+</head>
+
+<body style="height: 100hv; display: flex; justify-content:center; align-items:center;">
+  <div id="container" class='container text-center'>
+    <p>Вкажи правильно мій vodafone номер:</p>
+    <form class="form-inline">
+      <div class="form-group" style="margin: auto;">
+        <label for="mts">+38 (095) &nbsp </label>
+        <input type="text" id="mts" class="form-control text-center" placeholder="7 цифр" style="width: 50pt;">
+      </div>
+    </form>
+    <a class="btn btn-success" href="#" onclick="findoutNewNumber(event)">Отримати lifecell номер</a>
+    <br/>
+    <small id="life-here" class="text-muted mx-sm-12">
+      В тебе 3 спроби. <br />  Звісно, якщо ти не супер-крутий. :)
+    </small>
+
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/popper.js@1.12.5/dist/umd/popper.js" integrity="sha384-KlVcf2tswD0JOTQnzU4uwqXcbAy57PvV48YUiLjqpk/MJ2wExQhg9tuozn5A1iVw"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/bootstrap-material-design@4.0.0-beta.3/dist/js/bootstrap-material-design.js" integrity="sha384-hC7RwS0Uz+TOt6rNG8GX0xYCJ2EydZt1HeElNwQqW+3udRol4XwyBfISrNDgQcGA"
+    crossorigin="anonymous"></script>
+  <script>
+    window.onload = function () {
+      if (window.localStorage.tried > 2) {
+        document.getElementById('container').remove();
+      }
+    };
+    function findoutNewNumber(e) {
+      e.preventDefault();
+      var life = CryptoJS.AES.decrypt(
+        'U2FsdGVkX1/OTIrFWfkmn9QieLUG1CDck/V/RjkABgQ=',
+        document.getElementById('mts').value
+      ).toString(CryptoJS.enc.Utf8);
+      if (life.length > 0) {
+        document.getElementById('life-here').innerText = 'Good job! My life:) is ' + life;
+      } else {
+        window.localStorage.tried = parseInt(window.localStorage.tried) + 1 || 1;
+        document.getElementById('life-here').innerText = 'Sorry, wrong. You have ' + (3 - window.localStorage.tried || 0) + ' tries left.';
+      }
+
+      if (window.localStorage.tried > 2) {
+        document.getElementById('container').remove();
+      }
+    }
+  </script>
+</body>
+
+</html>
