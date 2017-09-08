@@ -49,7 +49,7 @@
         document.getElementById('life-here').innerText = 'Good job! My life:) is ' + life;
       } else {
         window.localStorage.tried = parseInt(window.localStorage.tried) + 1 || 1;
-        document.getElementById('life-here').innerText = 'Sorry, wrong. You have ' + (3 - window.localStorage.tried || 0) + ' tries left.';
+        document.getElementById('life-here').innerText = 'Невірно, пробач. Лишилося ' + (3 - window.localStorage.tried || 0) + ' спроби.';
       }
 
       if (window.localStorage.tried > 2) {
